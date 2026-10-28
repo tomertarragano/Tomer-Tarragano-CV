@@ -198,5 +198,15 @@
     <span>Tomer Tarragano — curriculum vitae</span>
     <a href="Tomer-Tarragano-CV.pdf" download>Download PDF</a>
   </footer>
+  <script>
+    (function () {
+      var nav = document.querySelector('.site-nav');
+      function setNavHeight() {
+        document.documentElement.style.setProperty('--nav-h', nav.offsetHeight + 'px');
+      }
+      setNavHeight();
+      window.addEventListener('resize', setNavHeight);
+    })();
+  </script>
 </body>
 </html>

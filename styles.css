@@ -16,6 +16,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* --nav-h is set from the banner's real height in index.html; it wraps at narrow widths */
+  scroll-padding-top: calc(var(--nav-h, 64px) + 16px);
 }
 
 body {
