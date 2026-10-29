@@ -6,7 +6,10 @@
   <meta name="theme-color" content="#1f3a5f" />
   <meta name="description" content="Curriculum vitae of Tomer Tarragano — chemistry graduate, Master's graduate of UNC Chapel Hill, and Senior Casting Technician at the University of Birmingham." />
   <title>Tomer Tarragano — CV</title>
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&display=swap" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
@@ -223,8 +226,26 @@
         });
       });
 
+      var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      var sections = Array.prototype.map.call(navLinks, function (link) {
+        return document.getElementById(link.getAttribute('href').slice(1));
+      });
+
+      function markActiveSection() {
+        var line = nav.offsetHeight + GAP + 8;
+        var current = -1;
+        sections.forEach(function (section, i) {
+          if (section && section.getBoundingClientRect().top <= line) current = i;
+        });
+        navLinks.forEach(function (link, i) {
+          link.classList.toggle('is-active', i === current);
+        });
+      }
+
       setNavHeight();
+      markActiveSection();
       window.addEventListener('resize', setNavHeight);
+      window.addEventListener('scroll', markActiveSection, { passive: true });
       window.addEventListener('load', function () {
         var target = location.hash && document.getElementById(location.hash.slice(1));
         if (target) scrollToSection(target, false);
